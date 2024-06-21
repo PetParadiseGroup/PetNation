@@ -1,0 +1,112 @@
+main{
+  width: 100%;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: #F0F2F5;
+}
+
+.form__group{
+  display: flex;
+  flex-direction: column;
+  gap: 30px;
+  width: 100%;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  margin: 30px 0;
+}
+
+.input__container--register{
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  gap: 10px;
+}
+
+.register__title{
+  font-size: 1.5rem;
+  font-weight: bold;
+  margin: 30px 0 0px 0;
+}
+
+.input__text--register{
+  width: 70%;
+  padding: 10px;
+  border: 1px solid #42BAD1;
+  border-radius: 7px;
+  font-size: 1rem;
+  outline: none;
+}
+
+.a__text{
+  font-size: 1.2rem;
+}
+
+.span__text{
+  font-size: 1rem;
+  font-weight: bold;
+}
+
+.submit__btn{
+  width: 70%;
+  background-color: #42BAD1;
+  color: black;
+  font-weight: bold;
+  border: none;
+  border-radius: 5px;
+  font-size: 1rem;
+  padding: 10px;
+  cursor: pointer;
+}
+
+.span__text a{
+  text-decoration: none;
+  color: #42BAD1;
+  font-weight: bold;
+}
+.container__register img{
+  width: 100%;
+  align-content: center;
+  padding: 2.5rem;
+}
+.line{
+  width: 100%;
+  background: rgba(205, 205, 205, 0.48);
+  height: 0.01rem;
+}
+/* Registro */
+
+.container__register{
+  display: flex;
+  flex-direction: column;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  background-color: white;
+  width: 400px;
+  justify-content: center;
+  align-items: center;
+  border-radius: 10px;
+  height: fit-content;
+  text-align: center;
+}
+
+@media (max-width: 450px){
+
+  .container__register{
+    width: 90%;
+  }
+
+  .register__title{
+    font-size: 1.5rem;
+    font-weight: bold;
+    margin: 30px 0 10px 0;
+  }
+
+  .span__text{
+    font-size: 1rem;
+    font-weight: 450;
+  }
+}

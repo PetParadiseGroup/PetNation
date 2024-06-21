@@ -1,0 +1,21 @@
+<main>
+  <div id="containerrg" class="container__register">
+    <img src="https://github.com/IanHD04/cambiazo/blob/main/logo-login.png?raw=true" alt="Logo PetNation" >
+    <div class="line"></div>
+    <h1 class="register__title">Crea una cuenta</h1>
+    <form id="formRegister" class="form__group form__group--register" action="/registrar" method="POST">
+      <div class="input__container--register">
+        <input [(ngModel)]="userData.nombre" class="input__text--register" id="nombre" type="text" placeholder="Nombre" name="txtNombre" required>
+        <input [(ngModel)]="userData.correo" class="input__text--register" id="email" type="email" placeholder="Correo electrónico" name="txtEmail" required>
+        <input [(ngModel)]="userData.celular" class="input__text--register" id="celular" type="text" placeholder="Teléfono" name="txtCelular" required>
+        <input [(ngModel)]="userData.contrasenia" class="input__text--register" id="id" type="password" placeholder="Contraseña" name="txtPassword" required>
+        <input  class="input__text--register"  type="password" placeholder="Repetir Contraseña" name="txtPassword" required>
+      </div>
+      <input (click)="onRegister()" id="btnRegister" class="submit__btn" type="submit" value="Crear cuenta">
+      <div class="registrarse">
+        <span class="span__text">¿Ya tienes una cuenta? <br><a id="linkRegister" href="login">Inicia Sesión</a></span>
+      </div>
+    </form>
+  </div>
+</main>
+<app-footer-content-2></app-footer-content-2>
