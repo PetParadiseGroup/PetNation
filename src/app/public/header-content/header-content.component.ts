@@ -28,6 +28,22 @@ import {MatCardAvatar} from "@angular/material/card";
   templateUrl: './header-content.component.html',
   styleUrl: './header-content.component.css'
 })
-export class HeaderContentComponent{
+export class HeaderContentComponent implements OnInit {
+  menuOpen = false;
+  currentUser: any;
 
+  constructor( private router: Router) {}
+
+  ngOnInit(): void {
+    this.currentUser = JSON.parse(localStorage.getItem('currentUser') || '{}');
+  }
+
+  toggleMenu() {
+    this.menuOpen = !this.menuOpen;
+  }
+
+  logout(){
+    localStorage.removeItem('currentUser');
+    this.router.navigate(['/login']);
+  }
 }

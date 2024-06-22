@@ -11,8 +11,10 @@ import {
 import { MatIcon } from "@angular/material/icon";
 import { PetnationApiService } from '../../services/petnation-api.service';
 import { Publications } from '../../models/publications-model/publications.model';
-import {NgForOf, NgOptimizedImage} from "@angular/common";
+import {NgForOf, NgIf, NgOptimizedImage} from "@angular/common";
 import {PostPublicationComponent} from "../post-publication/post-publication.component";
+import {User} from "../../models/user-model/user.model";
+import {catchError, forkJoin, map, of, switchMap} from "rxjs";
 
 @Component({
   selector: 'app-publications',
@@ -28,24 +30,41 @@ import {PostPublicationComponent} from "../post-publication/post-publication.com
     MatCardTitle,
     MatCardSubtitle,
     NgOptimizedImage,
-    PostPublicationComponent
+    PostPublicationComponent,
+    NgIf
   ],
   templateUrl: './publications.component.html',
   styleUrls: ['./publications.component.css']
 })
 export class PublicationsComponent implements OnInit {
-  publications: Publications[] = [];
+  publications: (Publications & { user?: User })[] = [];
 
   constructor(private petnationApiService: PetnationApiService) {}
 
   ngOnInit() {
-    this.petnationApiService.getPublications().subscribe(
-      (data: Publications[]) => {
+    this.petnationApiService.getPublications().pipe(
+      switchMap(publications => {
+        const userObservables = publications.map(publication =>
+          this.petnationApiService.getUserById(publication.usuario_id).pipe(
+            map(user => ({ ...publication, user })),
+            catchError(error => {
+              if (error.status === 404) {
+                console.error(`User with ID ${publication.usuario_id} not found.`);
+              } else {
+                console.error(`Error fetching user with ID ${publication.usuario_id}:`, error);
+              }
+              return of({ ...publication });
+            })
+          )
+        );
+        return forkJoin(userObservables);
+      })
+    ).subscribe(
+      (data) => {
         this.publications = data;
-        console.log(data)
       },
       (error) => {
-        console.error('Error fetching publications', error);
+        console.error('Error fetching publications or users', error);
       }
     );
   }

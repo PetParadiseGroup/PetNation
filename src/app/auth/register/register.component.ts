@@ -15,22 +15,21 @@ import {FooterContent2Component} from "../../public/footer-content-2/footer-cont
   styleUrl: './register.component.css'
 })
 export class RegisterComponent implements OnInit {
-  userData!: Register;
-  constructor(private petnationeApiService : PetnationApiService) {
-    this.userData = {} as Register; //Inicializa userData
-  }
+  userData: Register = new Register('', '', '');
+
+  constructor(private petnationApiService: PetnationApiService) {}
 
   ngOnInit(): void {}
 
-  onRegister(){
-    console.log(this.userData);
-    this.petnationeApiService.createUser(this.userData).subscribe(
+  onRegister(): void {
+    this.petnationApiService.createUser(this.userData).subscribe(
       (response) => {
         console.log(response);
-        alert('Usuario registrado con éxito')
+        alert('Usuario registrado con éxito');
       },
       (error) => {
-        console.log(error);
+        console.error('Error al registrar usuario:', error);
+        alert('Error al registrar usuario');
       }
     );
   }

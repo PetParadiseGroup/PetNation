@@ -1,46 +1,54 @@
 import { Injectable } from '@angular/core';
-import {HttpClient, HttpErrorResponse} from "@angular/common/http";
-import {catchError, Observable, retry, throwError} from "rxjs";
-import {Register} from "../../auth/models/register-model/register.model";
-import {Publications} from "../models/publications-model/publications.model";
+import { HttpClient, HttpErrorResponse } from "@angular/common/http";
+import {catchError, Observable, throwError, forkJoin, retry} from "rxjs";
+import { Register } from "../../auth/models/register-model/register.model";
+import { Publications } from "../models/publications-model/publications.model";
+import { User } from '../models/user-model/user.model';
+import {Login} from "../../auth/models/login-model/login.model";
 
 @Injectable({
   providedIn: 'root'
 })
 export class PetnationApiService {
-  private apiUrl = 'http://20.197.231.48'; // Coloca aquí la URL base de tu API
+  private apiUrl = 'http://20.197.231.48';
 
   constructor(private http: HttpClient) {}
 
-  // Método para obtener publicaciones
-  getPublications(): Observable<any> {
+  getPublications(): Observable<Publications[]> {
     const url = `${this.apiUrl}/publicaciones`;
-    return this.http.get(url).pipe(
+    return this.http.get<Publications[]>(url).pipe(
       catchError(this.handleError)
     );
   }
 
-  // Método privado para manejar errores
+  getUserById(userId: string): Observable<User> {
+    const url = `${this.apiUrl}/users/${userId}`;
+    return this.http.get<User>(url).pipe(
+      catchError(this.handleError)
+    );
+  }
+
   private handleError(error: HttpErrorResponse) {
     if (error.error instanceof ErrorEvent) {
-      // Error del lado del cliente
       console.error('An error occurred:', error.error.message);
     } else {
-      // El servidor retornó un código de error
-      console.error(
-        `Backend returned code ${error.status}, ` +
-        `body was: ${error.error}`);
+      console.error(`Backend returned code ${error.status}, body was:`, error.error);
     }
-    // Retornar un observable con un mensaje de error descriptivo
-    return throwError(
-      'Something bad happened; please try again later.');
+    return throwError('Something bad happened; please try again later.');
   }
 
-  createUser(item: any): Observable<Register> {
+  createUser(userData: Register): Observable<User> {
     const url: string = `${this.apiUrl}/register`;
-    return this.http.post<Register>(url, item)
-      .pipe(retry(2), catchError(this.handleError));
+    return this.http.post<User>(url, userData)
+      .pipe(
+        catchError(this.handleError)
+      );
   }
-
-
+  loginUser(loginData: Login): Observable<User> {
+    const url: string = `${this.apiUrl}/login`;
+    return this.http.post<User>(url, loginData)
+      .pipe(
+        catchError(this.handleError)
+      );
+  }
 }

@@ -5,6 +5,7 @@ export class Publications {
   fecha_creacion: string;
   likes: string[];
   usuario_id: string;
+  img_url: string;
 
   constructor(
     _id: string,
@@ -12,7 +13,8 @@ export class Publications {
     contenido: string,
     fecha_creacion: string,
     likes: string[],
-    usuario_id: string
+    usuario_id: string,
+    img_url:string
   ) {
     this._id = _id;
     this.comentarios = comentarios;
@@ -20,6 +22,7 @@ export class Publications {
     this.fecha_creacion = fecha_creacion;
     this.likes = likes;
     this.usuario_id = usuario_id;
+    this.img_url=img_url;
   }
 }
 

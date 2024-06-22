@@ -1,19 +1,11 @@
 export class Register {
-  nombre: any;
-  apellido_paterno: any;
-  apellido_materno: any;
-  correo: any;
-  celular: any;
-  direccion: any;
-  contrasenia: any;
+  nombre: string;
+  correoElectronico: string;
+  contrasenia: string;
 
-  constructor(nombre: any, apellido_paterno: any, apellido_materno: any, correo: any, celular: any, direccion: any, contrasenia: any) {
+  constructor(nombre: string, correoElectronico: string, contrasenia: string) {
     this.nombre = nombre;
-    this.apellido_paterno = apellido_paterno;
-    this.apellido_materno = apellido_materno;
-    this.correo = correo;
-    this.celular = celular;
-    this.direccion = direccion;
+    this.correoElectronico = correoElectronico;
     this.contrasenia = contrasenia;
   }
 }
