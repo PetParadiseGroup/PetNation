@@ -10,7 +10,7 @@ import {Login} from "../../auth/models/login-model/login.model";
   providedIn: 'root'
 })
 export class PetnationApiService {
-  private apiUrl = 'http://20.197.231.48';
+  private apiUrl = 'https://20.197.231.48';
 
   constructor(private http: HttpClient) {}
 
