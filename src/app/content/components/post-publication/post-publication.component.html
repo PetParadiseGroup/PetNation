@@ -1,1 +1,21 @@
-<p>post-publication works!</p>
+<mat-card class="post-publication-card">
+  <mat-card-header class="header-publication">
+    <mat-card-title class="header-publication-title"><h1>Nueva Publicación</h1></mat-card-title>
+  </mat-card-header>
+  <mat-card-content>
+    <input type="text" placeholder="¿Qué estás pensando?" class="input-comment" [(ngModel)]="contenido"/>
+
+    <ngx-dropzone accept="image/*" (change)="onSelect($event)" [multiple]="false">
+      <ngx-dropzone-label *ngIf="!files.length">Subir Foto</ngx-dropzone-label>
+      <ngx-dropzone-image-preview
+        ngProjectAs="ngx-dropzone-preview"
+        [removable]="true"
+        *ngFor="let f of files"
+        [file]="f"
+        (removed)="onRemove(f)">
+      </ngx-dropzone-image-preview>
+    </ngx-dropzone>
+
+    <button class="send-comment"  (click)="crearPublicacion()">Publicar</button>
+  </mat-card-content>
+</mat-card>

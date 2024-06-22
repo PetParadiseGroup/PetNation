@@ -70,16 +70,21 @@ h1,h2,h3,h4,h5,h6,p{
   display: flex;
   flex-direction: row;
   align-items: center;
-  gap: 5px;
+  gap: 2px;
 }
-.comments-container p{
+.comments-container p, .likes-container p{
   font-weight: bold;
 }
 .comments {
   margin-top: 10px;
   width: 100%;
 }
-
+.post-publication-card {
+  background: #ffffff;
+  border-radius: 5px;
+  margin-bottom: 15px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
 .comment {
   background: #F0F2F5;
   border-radius: 10px;
@@ -125,9 +130,4 @@ h1,h2,h3,h4,h5,h6,p{
 }
 
 
-.post-publication-card{
-  background: #ffffff;
-  border-radius: 5px;
-  margin-bottom: 15px;
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-}
+

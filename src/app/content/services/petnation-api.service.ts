@@ -21,15 +21,24 @@ export class PetnationApiService {
     );
   }
 
-  post(){
-
-  }
-
   getUserById(userId: string): Observable<User> {
     const url = `${this.apiUrl}/users/${userId}`;
     return this.http.get<User>(url).pipe(
       catchError(this.handleError)
     );
+  }
+
+
+  createPublications(publicationData: any): Observable<any> {
+    const headers = { 'Content-Type': 'application/json' }; // Add any other headers your server might require
+    const body = JSON.stringify(publicationData);
+    return this.http.post<any>(`${this.apiUrl}/publicaciones`, body, { headers: headers });
+  }
+
+  addComment(postId: string, commentData: any): Observable<any> {
+    const headers = { 'Content-Type': 'application/json' };
+    const body = JSON.stringify(commentData);
+    return this.http.post<any>(`${this.apiUrl}/publicaciones/${postId}/comentarios`, body, { headers: headers });
   }
 
   private handleError(error: HttpErrorResponse) {

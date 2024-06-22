@@ -1,57 +1,54 @@
 <div class="sent-offers-cards-container">
   <div class="container-get-offers">
-    <mat-card class="post-publication-card">
-      <mat-card-header class="header-publication">
-        <mat-card-title class="header-publication-title"><h1>Nueva Publicación</h1></mat-card-title>
-      </mat-card-header>
-      <mat-card-content>
-        <input type="text" placeholder="¿Qué estás pensando?" class="input-comment"/>
-        <button class="send-comment">Publicar</button>
-      </mat-card-content>
-    </mat-card>
+    <app-post-publication></app-post-publication>
+    <div *ngIf="isLoading">
+      Cargando...
+    </div>
 
-    <ng-container *ngFor="let publication of publications">
-      <mat-card class="publication-card">
-        <mat-card-header class="header-publication">
-          <mat-card-title class="header-publication-title">
-            <h1>{{ publication.user?.nombre || 'Usuario Desconocido' }}</h1>
-          </mat-card-title>
-          <mat-card-subtitle class="header-publication-subtitle"><h3>{{publication.fecha_creacion}}</h3></mat-card-subtitle>
-        </mat-card-header>
-        <mat-card-content>
-          <div class="publication-content">
-            <div class="publication-content-text">
-              <p>{{publication.contenido}}</p>
-            </div>
-            <div class="image-container" *ngIf="publication.img_url">
-              <img [src]="publication.img_url" alt="">
-            </div>
-            <div class="likes-comments">
-              <div class="likes-container">
-                <mat-icon>thumb_up</mat-icon><p>{{publication.likes.length}} likes</p>
+    <div *ngIf="!isLoading">
+      <ng-container *ngFor="let publication of publications.slice().reverse()">
+        <mat-card class="publication-card">
+          <mat-card-header class="header-publication">
+            <mat-card-title class="header-publication-title">
+              <h1>{{ publication.user?.nombre || 'Usuario Desconocido' }}</h1>
+            </mat-card-title>
+            <mat-card-subtitle class="header-publication-subtitle"><h3>{{publication.fecha_creacion}}</h3></mat-card-subtitle>
+          </mat-card-header>
+          <mat-card-content>
+            <div class="publication-content">
+              <div class="publication-content-text">
+                <p>{{publication.contenido}}</p>
               </div>
-              <div class="comments-container">
-                <p>{{publication.comentarios.length}} {{ publication.comentarios.length === 1 ? 'comentario' : 'comentarios' }}</p>
+              <div class="image-container" *ngIf="publication.img_url">
+                <img [src]="publication.img_url" alt="">
+              </div>
+              <div class="likes-comments">
+                <div class="likes-container">
+                  <mat-icon style="color: #42BAD1">favorite</mat-icon><p>{{publication.likes.length}}</p>
+                </div>
+                <div class="comments-container">
+                  <p>{{publication.comentarios.length}} {{ publication.comentarios.length === 1 ? 'comentario' : 'comentarios' }}</p>
+                </div>
               </div>
             </div>
-          </div>
-          <div class="line"></div>
-          <div class="comments">
-            <h3>Comentarios:</h3>
-            <ng-container *ngFor="let comment of publication.comentarios">
-              <div class="comment">
-                <h3 class="comment-user">
-                  {{ publication.user?.nombre || 'Usuario Desconocido' }}
-                </h3>
-                <p class="comment-text">{{ comment.texto }}</p>
-              </div>
-            </ng-container>
-          </div>
-          <div class="line"></div>
-          <input type="text" placeholder="Escribe un comentario..." class="input-comment"/>
-          <button class="send-comment">Enviar</button>
-        </mat-card-content>
-      </mat-card>
-    </ng-container>
+            <div class="line"></div>
+            <div class="comments">
+              <h3>Comentarios:</h3>
+              <ng-container *ngFor="let comment of publication.comentarios">
+                <div class="comment">
+                  <h3 class="comment-user">
+                    {{ comment.user?.nombre || 'Usuario Desconocido' }}
+                  </h3>
+                  <p class="comment-text">{{ comment.texto }}</p>
+                </div>
+              </ng-container>
+            </div>
+            <div class="line"></div>
+            <input type="text" placeholder="Escribe un comentario..." class="input-comment" [(ngModel)]="texto"/>
+            <button class="send-comment" (click)="createComment(publication._id)">Enviar</button>
+          </mat-card-content>
+        </mat-card>
+      </ng-container>
+    </div>
   </div>
 </div>
