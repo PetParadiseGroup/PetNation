@@ -62,7 +62,10 @@ main{
   padding: 10px;
   cursor: pointer;
 }
-
+.submit__btn:hover{
+  background-color: #000000;
+  color: white;
+}
 .span__text a{
   text-decoration: none;
   color: #42BAD1;

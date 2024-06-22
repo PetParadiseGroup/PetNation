@@ -6,7 +6,10 @@ main{
   justify-content: center;
   background: #F0F2F5;
 }
-
+.submit__btn:hover{
+  background-color: #000000;
+  color: white;
+}
 .container__login{
   display: flex;
   flex-direction: column;

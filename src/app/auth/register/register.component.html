@@ -3,14 +3,14 @@
     <img src="https://github.com/IanHD04/cambiazo/blob/main/logo-login.png?raw=true" alt="Logo PetNation">
     <div class="line"></div>
     <h1 class="register__title">Crea una cuenta</h1>
-    <form id="formRegister" class="form__group form__group--register" (ngSubmit)="onRegister()">
+    <form id="formRegister" class="form__group form__group--register" [formGroup]="registerForm" (ngSubmit)="onRegister()">
       <div class="input__container--register">
-        <input [(ngModel)]="userData.nombre" class="input__text--register" id="nombre" type="text" placeholder="Nombre" name="txtNombre" required>
-        <input [(ngModel)]="userData.correoElectronico" class="input__text--register" id="email" type="email" placeholder="Correo electrónico" name="txtEmail" required>
-        <input [(ngModel)]="userData.contrasenia" class="input__text--register" id="id" type="password" placeholder="Contraseña" name="txtPassword" required>
-        <input class="input__text--register" type="password" placeholder="Repetir Contraseña" name="txtPassword" required>
+        <input formControlName="nombre" class="input__text--register" id="nombre" type="text" placeholder="Nombre" required>
+        <input formControlName="correoElectronico" class="input__text--register" id="email" type="email" placeholder="Correo electrónico" required>
+        <input formControlName="contrasenia" class="input__text--register" id="id" type="password" placeholder="Contraseña" required>
+        <input formControlName="confirmContrasenia" class="input__text--register" type="password" placeholder="Repetir Contraseña" required>
       </div>
-      <input id="btnRegister" class="submit__btn" type="submit" value="Crear cuenta">
+      <input id="btnRegister" class="submit__btn" type="submit" value="Crear cuenta" [disabled]="!registerForm.valid">
       <div class="registrarse">
         <span class="span__text">¿Ya tienes una cuenta? <br><a id="linkRegister" href="login">Inicia Sesión</a></span>
       </div>
