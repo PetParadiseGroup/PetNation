@@ -25,9 +25,7 @@ export class LoginComponent implements OnInit {
   onLogin(): void {
     this.petnationApiService.loginUser(this.loginData).subscribe(
       (response) => {
-        console.log(response);
         localStorage.setItem('currentUser', JSON.stringify(response));
-
         alert('¡Inicio de sesión exitoso!');
         this.router.navigate(['/home']);
       },
