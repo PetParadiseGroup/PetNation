@@ -21,6 +21,10 @@ export class PetnationApiService {
     );
   }
 
+  post(){
+
+  }
+
   getUserById(userId: string): Observable<User> {
     const url = `${this.apiUrl}/users/${userId}`;
     return this.http.get<User>(url).pipe(
